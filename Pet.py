@@ -1,11 +1,11 @@
-from PetsOptins import PetsOptions
+from TypesOfPets import TypesOfPets
 from typing import List
 
 
 class Pet(object):
-    def __init__(self, name: str, type: PetsOptions):
+    def __init__(self, name: str, pet_type: TypesOfPets):
         self._name: str = name
-        self._type: str = type
+        self._pet_type: str = pet_type
         self._hunger: int = 50
         self._happiness: int = 50
         self._energy: int = 50
@@ -21,12 +21,12 @@ class Pet(object):
         self._name = name
 
     @property
-    def type(self) -> str:
-        return self._type
+    def pet_type(self) -> str:
+        return self._pet_type
     
-    @type.setter
-    def type(self, type: PetsOptions) -> None:
-        self._type = type
+    @pet_type.setter
+    def pet_type(self, pet_type: TypesOfPets) -> None:
+        self._pet_type = pet_type
 
     @property
     def hunger(self) -> int:
@@ -105,3 +105,40 @@ class Pet(object):
         :param new_item: New element to the list
         """
         self._history.append(new_item)
+    
+    def eat(self) -> None:
+        """
+        
+        Update pet parameters according to the eating actions
+        """
+        self.change_hunger(10)
+        self.change_energy(5)
+        self.change_happiness(5)
+        self.change_points(10)
+        self.add_history_action("eat")
+        print("Your animal ate food!")
+
+
+    def sleep(self) -> None:
+        """
+        
+        Update pet parameters according to the sleeping actions
+        """
+        self.change_energy(10)
+        self.change_happiness(5)
+        self.change_points(10)
+        self.add_history_action("sleep")
+        print("Your animal went to sleep!")
+
+
+    def play(self) -> None:
+        """
+        
+        Update pet parameters according to the playing actions
+        """
+        self.change_happiness(10)
+        self.change_energy(-7)
+        self.change_hunger(-3)
+        self.change_points(10)
+        self.add_history_action("play")
+        print("Your animal played!")

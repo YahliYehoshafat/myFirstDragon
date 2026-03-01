@@ -1,5 +1,5 @@
 from Pet import Pet
-from PetsOptins import PetsOptions
+from TypesOfPets import TypesOfPets
 from Actions import eat, sleep, play, get_pet_state, calaulate_pet_profile
 
 
@@ -51,11 +51,11 @@ def create_new_animal() -> Pet:
         pet_type = input()
     match int(pet_type):
         case 1:
-            pet_type = PetsOptions.CAT.value
+            pet_type = TypesOfPets.CAT.value
         case 2:
-            pet_type = PetsOptions.DOG.value
+            pet_type = TypesOfPets.DOG.value
         case 3: 
-            pet_type = PetsOptions.DOLPHIN.value
+            pet_type = TypesOfPets.DOLPHIN.value
     return Pet(pet_name, pet_type)
 
 
