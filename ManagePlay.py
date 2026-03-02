@@ -1,6 +1,6 @@
 from Pet import Pet
 from TypesOfPets import TypesOfPets
-from Actions import eat, sleep, play, get_pet_state, calaulate_pet_profile
+from Actions import get_pet_state, calaulate_pet_profile
 
 
 def manage_play() -> None:
@@ -20,11 +20,11 @@ def manage_play() -> None:
                 option = input()
             match int(option):
                 case 1:
-                    sleep(pet)
+                    pet.sleep()
                 case 2:
-                    eat(pet)
+                    pet.eat()
                 case 3:
-                    play(pet)
+                    pet.play()
                 case 4:
                     get_pet_state(pet)
                 case 5:
