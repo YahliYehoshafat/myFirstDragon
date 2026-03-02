@@ -1,4 +1,5 @@
 from TypesOfPets import TypesOfPets
+from Properties import Properties
 from typing import List
 
 
@@ -32,53 +33,29 @@ class Pet(object):
     def hunger(self) -> int:
         return self._hunger
     
-    def change_hunger(self, hunger: int) -> None:
+    def change_property(self, property: str, level: int) -> None:
         """
         
-        Changes hunger score
-        :param hunger: How much do you want to reduce/add to your hunger param
+        Changes property score
+        :param level: How much do you want to reduce/add to your property param
+        :param property: property name
+        :param property_name: property name with "_" char
         """
-        self._hunger = self._hunger + hunger
-        if self._hunger > 100:
-            self._hunger = 100
-        elif self._hunger <= 0:
+        property_name = "_" + property
+        setattr(self, property_name, getattr(self, property_name) + level)
+        if getattr(self, property_name) > 100:
+            setattr(self, property_name, 100)
+        elif getattr(self, property_name) <= 0:
             self.change_points(-30)
-            self._hunger = 0
+            setattr(self, property_name, 0)
     
     @property
     def happiness(self) -> int:
         return self._happiness
     
-    def change_happiness(self, happiness: int) -> None:
-        """
-        
-        Changes happiness score
-        :param happiness: How much do you want to reduce/add to your happiness param
-        """
-        self._happiness = self._happiness + happiness
-        if self._happiness > 100:
-            self._happiness = 100
-        elif self._happiness <= 0:
-            self.change_points(-30)
-            self._happiness = 0
-
-    
     @property
     def energy(self) -> int:
         return self._energy
-    
-    def change_energy(self, energy: int) -> None:
-        """
-        
-        Changes energy score
-        :param energy: How much do you want to reduce/add to your energy param
-        """
-        self._energy = self._energy + energy
-        if self._energy > 100:
-            self._energy = 100
-        elif self._energy <= 0:
-            self.change_points(-30)
-            self._energy = 0
     
     @property
     def points(self) -> int:
@@ -111,34 +88,36 @@ class Pet(object):
         
         Update pet parameters according to the eating actions
         """
-        self.change_hunger(10)
-        self.change_energy(5)
-        self.change_happiness(5)
+        self.change_property(Properties.HUNGER.value, 10)
+        self.change_property(Properties.ENERGY.value, 5)
+        self.change_property(Properties.HAPPINESS.value, 5)
         self.change_points(10)
         self.add_history_action("eat")
-        print("Your animal ate food!")
-
+        self.print_pet_health("Your animal ate food!")
 
     def sleep(self) -> None:
         """
         
         Update pet parameters according to the sleeping actions
         """
-        self.change_energy(10)
-        self.change_happiness(5)
+        self.change_property(Properties.ENERGY.value, 10)
+        self.change_property(Properties.HAPPINESS.value, 5)
         self.change_points(10)
         self.add_history_action("sleep")
-        print("Your animal went to sleep!")
-
+        self.print_pet_health("Your animal went to sleep!")
 
     def play(self) -> None:
         """
         
         Update pet parameters according to the playing actions
         """
-        self.change_happiness(10)
-        self.change_energy(-7)
-        self.change_hunger(-3)
+        self.change_property(Properties.HUNGER.value, -3)
+        self.change_property(Properties.ENERGY.value, -7)
+        self.change_property(Properties.HAPPINESS.value, 10)
         self.change_points(10)
         self.add_history_action("play")
-        print("Your animal played!")
+        self.print_pet_health("Your animal played!")
+
+    @staticmethod
+    def print_pet_health(data):
+        print(data)
