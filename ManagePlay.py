@@ -1,6 +1,6 @@
 from Pet import Pet
 from TypesOfPets import TypesOfPets
-from Actions import get_pet_state, calaulate_pet_profile
+from Actions import get_pet_state, calculate_pet_profile
 
 
 def manage_play() -> None:
@@ -28,7 +28,7 @@ def manage_play() -> None:
                 case 4:
                     get_pet_state(pet)
                 case 5:
-                    print(calaulate_pet_profile(pet))
+                    print(calculate_pet_profile(pet))
             print()
     except KeyboardInterrupt:
         print("\nBye bye :(")
